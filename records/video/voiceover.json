@@ -1,0 +1,7 @@
+{
+  "provider": "Google Cloud Text-to-Speech",
+  "project": "ata-creative-change-2026",
+  "voice": "en-US-Neural2-F",
+  "sample_rate": 24000,
+  "characters": 1924
+}

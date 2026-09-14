@@ -1,0 +1,15 @@
+flowchart TD
+  U[Designer] --> I[Pointer or local camera adapter]
+  I --> R[Input recorder\ninitial snapshot + timestamped signals]
+  R --> S[Scene and installed rules]
+  S --> A[Strands Agent\nVertex/Gemini or optional Bedrock]
+  A --> T[Constrained rule tools\npropose / patch / validate]
+  T --> C[Candidate ruleset]
+  C --> V[Preview and versioned install]
+  R --> P[Deterministic replay]
+  S --> P
+  V --> P
+  P --> D[OLD | NEW comparison]
+  D --> K[Try, keep, revert, or revise]
+  K --> S
+  S --> E[(Durable event journal\nversions, tool calls, exports)]

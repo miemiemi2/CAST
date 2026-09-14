@@ -1,0 +1,59 @@
+{
+  "proof": {
+    "intent": "When Player reaches Cargo, attach Cargo to Player so the same drag can carry it to the Goal.",
+    "base_version": 20,
+    "candidate": [
+      {
+        "kind": "binding",
+        "source": "prop",
+        "signal": "x",
+        "target": "stage",
+        "target_object": null,
+        "effect": "position",
+        "threshold": 0.5,
+        "state_key": "active",
+        "version": 1,
+        "when": "always",
+        "event": "frame",
+        "duration_ms": 0,
+        "amount": 1,
+        "persist": true,
+        "conditions": [],
+        "conditions_mode": "all"
+      },
+      {
+        "kind": "binding",
+        "source": "prop",
+        "signal": "distance",
+        "target": "B",
+        "target_object": "B",
+        "effect": "attach",
+        "threshold": 0.5,
+        "state_key": "cargo_attached",
+        "version": 1,
+        "when": "always",
+        "event": "frame",
+        "duration_ms": 0,
+        "amount": 1,
+        "persist": true,
+        "conditions": [
+          {
+            "signal": "distance",
+            "when": "below",
+            "threshold": 0.1
+          }
+        ],
+        "conditions_mode": "all"
+      }
+    ],
+    "recorded": "Play recorded · 84 input frames",
+    "identicalInitial": true,
+    "identicalInput": true,
+    "cargo": [
+      0.48,
+      0.689999997585157
+    ],
+    "installedVersion": 21
+  },
+  "errors": []
+}

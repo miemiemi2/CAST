@@ -1,0 +1,101 @@
+{
+  "errors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:8765/api/intent",
+      "body": {
+        "text": "Keep cargo connected when I flick quickly. Preserve the slow approach requirement for picking it up and the Player movement."
+      }
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:8765/api/intent",
+      "status": 200,
+      "body": {
+        "rules": [
+          {
+            "kind": "binding",
+            "source": "prop",
+            "signal": "x",
+            "target": "stage",
+            "target_object": null,
+            "effect": "position",
+            "threshold": 0.5,
+            "state_key": "active",
+            "version": 1,
+            "when": "always",
+            "event": "frame",
+            "duration_ms": 0,
+            "amount": 1,
+            "persist": true,
+            "conditions": [],
+            "conditions_mode": "all"
+          },
+          {
+            "kind": "binding",
+            "source": "prop",
+            "signal": "distance",
+            "target": "B",
+            "target_object": null,
+            "effect": "attach",
+            "threshold": 0.5,
+            "state_key": "active",
+            "version": 1,
+            "when": "always",
+            "event": "frame",
+            "duration_ms": 0,
+            "amount": 1,
+            "persist": true,
+            "conditions": [
+              {
+                "signal": "distance",
+                "when": "below",
+                "threshold": 0.1
+              },
+              {
+                "signal": "speed",
+                "when": "below",
+                "threshold": 0.2
+              }
+            ],
+            "conditions_mode": "all"
+          },
+          {
+            "kind": "relation",
+            "source": "prop",
+            "signal": "speed",
+            "target": "B",
+            "target_object": null,
+            "effect": "detach",
+            "threshold": 0.5,
+            "state_key": "active",
+            "version": 1,
+            "when": "always",
+            "event": "frame",
+            "duration_ms": 0,
+            "amount": 1,
+            "persist": true,
+            "conditions": [
+              {
+                "signal": "speed",
+                "when": "above",
+                "threshold": 0.5
+              }
+            ],
+            "conditions_mode": "all"
+          }
+        ],
+        "base_version": 15,
+        "reply": "The existing rule for detaching cargo already handles fast flicks (speed above 0.5), so no changes are needed to keep it connected during a quick flick.\n",
+        "status": "unchanged",
+        "provider": "vertex",
+        "model": "gemini-2.5-flash",
+        "calls": 58,
+        "origin": "agent"
+      }
+    }
+  ],
+  "recorded": "Play recorded · 73 input frames",
+  "failure": "locator.waitFor: Timeout 120000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#try-new') to be visible\u001b[22m\n\u001b[2m    237 × locator resolved to hidden <button disabled id=\"try-new\" type=\"button\">Try new version</button>\u001b[22m\n"
+}

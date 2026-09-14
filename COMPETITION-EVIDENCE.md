@@ -1,34 +1,21 @@
 # CAST evidence map
 
-CAST's current product claim is: **a designer plays once, asks for a
-mechanic change, and sees that exact play under the old and new control
-systems.**
+CAST's product claim is: **a designer plays once, asks for a mechanic change, and sees that exact play under the old and new control systems.**
 
-## Evidence already available
+## Evidence available
 
-- `records/browser-replay/1789424427412/`: real Playwright pointer input,
-  real Strands/Vertex proposal, 73 recorded frames, identical initial state
-  and input, and visibly different OLD/NEW Cargo outcomes.
-- `records/browser-replay/first-creation-1789424115303/`: first creation from
-  stage rules using a real Agent, 84 pointer frames, and deterministic replay.
-- `records/browser-replay/two-rounds-1789423869980/`: two successive real
-  patch requests, candidate trial, Keep, and Revert with identical
-  initial-state/input proofs; tool calls and hashes are retained.
-- `records/browser-replay/anti-preset-1789424616191/`: an unlisted relation
-  assembled from generic signal, condition, and position primitives, with a
-  saved `proof.json` and comparison screenshot (no video claim).
+- `records/browser-replay/first-creation-1789428828759/`: fresh-baseline browser run with 84 real pointer frames, a real Strands proposal, identical OLD/NEW initial state and input, visible Cargo difference, Try, and Keep.
+- `records/browser-replay/two-rounds-1789428885073/`: two successive real patch requests from accepted versions, candidate trial, Keep, Revert, and identical input/snapshot proofs.
+- `records/browser-replay/anti-preset-1789428962799/`: an unlisted relation assembled from generic signal, condition, and position primitives, with identical replay input/snapshot and a visible result difference.
+- Earlier browser captures remain under `records/browser-replay/` as historical evidence.
 - `records/video/voiceover.wav`: English Google Cloud voiceover, 121.3 seconds.
 
 ## Automated runtime evidence
 
-- Python suite: 38 passed.
-- Browser runtime suite: 15 passed.
-- Coverage includes threshold/edge conditions, AND/OR composition, duration,
-  occlusion, custom objects, stateful attach/detach, and Python/browser parity.
+- Python suite: 44 passed with one dependency deprecation warning.
+- Browser runtime suite: 16 passed.
+- Coverage includes threshold and edge conditions, AND/OR composition, duration, occlusion, custom objects, stateful attach/detach, scene replacement and rollback synchronization, and Python/browser parity.
 
 ## Boundaries
 
-Pointer/replay is the active competition route. Camera/ArUco remains an input
-adapter, not the current hero gate. Stronger evidence is still required for
-multi-object camera recovery, persistent recording/export identity, and final
-end-to-end delivery; those are not claimed complete.
+Pointer/replay is the primary competition route. Camera/ArUco remains an input adapter and has automated tracker coverage, but a complete physical-camera acceptance record is not claimed here. A public live deployment and final competition video URL are not present in this repository.

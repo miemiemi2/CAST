@@ -23,12 +23,13 @@ Camera/ArUco development is paused. Main experience is a playable graybox with P
 
 ## Remaining acceptance work (not complete)
 
-- Browser two-round revision/Keep/Revert now has evidence. First creation from the intended fresh prototype baseline still needs full browser acceptance; the two-round run starts from existing attach rules.
+- Browser first creation from a fresh baseline now has evidence in `records/browser-replay/first-creation-1789428828759/`: 84 real pointer frames, real Agent attach proposal, identical OLD/NEW input and snapshot, visible Cargo difference, Try and Keep.
+- Browser two-round revision/Keep/Revert now also has fresh evidence in `records/browser-replay/two-rounds-1789428885073/`; generic anti-preset composition is recorded in `records/browser-replay/anti-preset-1789428962799/`.
 - Strengthen Agent semantic reliability, especially negated/reversed requests and false unchanged claims. No hardcoded fallback.
 - Trial dragging and Keep/Revert were exercised in the continuous sequence; retain and review these screenshots/video for the final demonstration.
 - Finish persistent recording/export and auditable input/version identity; current browser evidence captures the raw requests/results externally.
 - Replay controls, coherent ready/error state, scene context alignment, and target validation need review. The prior uppercase-only target heuristic does not prove registered-object validation.
-- Anti-preset third request, completed silent hero check, public source, English submission/README, architecture/Strands evidence, and full 3–4 minute video are outstanding. Current raw WebM files are evidence, not the final video.
+- Completed silent hero check, public source, English submission/README, architecture/Strands evidence, and full 3–4 minute video are still outstanding. Current raw WebM files are evidence, not the final video.
 
 ## Operational notes
 
@@ -59,3 +60,4 @@ Previous camera-focused status is archived in docs/status-before-pointer-replay.
 - Worker finished `records/video/competition-cut-draft-with-voiceover.webm` and copied it to Mac as `/Users/mixu/Desktop/CAST-competition-cut-draft.webm`. Verified duration 226.008 s (3:46), 1440x1080 VP9 + 48 kHz mono Opus, 35,157,336 bytes; SHA-256 `afe5c23a8081f96e9f2bc1862bf23d10d6fe5b0177be28196e33b75013ca38e7` on both sides. This remains a draft requiring visual/audio review before submission.
 
 - Verification refresh: Python `pytest -q` reports 40 passed with one dependency deprecation warning; `node --test tests/*.test.mjs` reports 16 passed. `static/stage.mjs` and `static/tracking.mjs` pass syntax checks and Python modules compile cleanly. README was aligned with the pointer/replay competition path.
+- Fresh acceptance refresh: Python `pytest -q` reports 42 passed with one dependency deprecation warning. Real browser first creation, two-round patch, and anti-preset evidence were generated and pushed in commits `baeb2f6`, `0c339f9`, and `e61772e`.

@@ -1,7 +1,6 @@
-# CAST · live object theatre
+# CAST · live playtest agent
 
-CAST turns a performer’s new interpretation into a new control system while the performance is still happening. Play a small graybox scene with pointer input or physical tracked objects, then describe a relationship
-and change how those movements affect the scene. Strands interprets the
+CAST lets a game or interaction designer play a small prototype once, describe a mechanic change, and compare that exact play under old and new rules. Pointer input is the primary competition path; physical tracked objects remain an input adapter. Strands interprets the
 request and calls a constrained rule tool; the local application controls
 validation, installation, revisions and Undo.
 

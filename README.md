@@ -1,7 +1,7 @@
 # CAST · live object theatre
 
-CAST turns a performer’s new interpretation into a new control system while the performance is still happening. Move physical objects and describe a relationship,
-and change how those movements affect a theatre scene. Strands interprets the
+CAST turns a performer’s new interpretation into a new control system while the performance is still happening. Play a small graybox scene with pointer input or physical tracked objects, then describe a relationship
+and change how those movements affect the scene. Strands interprets the
 request and calls a constrained rule tool; the local application controls
 validation, installation, revisions and Undo.
 

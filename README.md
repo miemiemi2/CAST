@@ -91,3 +91,7 @@ candidate → deterministic replay data flow.
 Optional native CV adapter: `pip install -e '.[cv]'`. This installs a dependency,
 not an automatic browser integration. OpenCV is third-party infrastructure;
 CAST's contribution is the creative workflow and governed relationship changes.
+
+### Scene identity
+
+Scene objects have stable runtime IDs and human-readable labels. Replay resolves labels to those IDs before validation, so an Agent referring to “Cargo” cannot silently create a second actor when the recording stores that object as `B`. Unknown targets fail the replay request explicitly.

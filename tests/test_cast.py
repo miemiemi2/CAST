@@ -268,3 +268,13 @@ def test_recording_is_persisted_and_exported(tmp_path):
   exported=TestClient(appmod.app).get('/api/export').json()
   assert exported['recordings'][0]['id']=='play-check'
  finally: appmod.store=old
+
+def test_object_replace_and_remove_sync_runtime_namespace(tmp_path):
+ s=make(tmp_path); s.update_scene([SceneObject(id='hero',label='Hero')],0)
+ s.data['state']['runtime']['objects']['hero']['flags']['attached']=True
+ s.replace_object(SceneObject(id='hero',label='New Hero',kind='character',x=.8,y=.2),1)
+ live=s.data['state']['runtime']['objects']['hero']
+ assert (live['x'],live['y'],live['visible'])==(.8,.2,True)
+ assert live['flags']['attached'] is True
+ s.remove_object('hero',2)
+ assert 'hero' not in s.data['state']['runtime']['objects']

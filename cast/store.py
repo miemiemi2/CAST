@@ -97,6 +97,16 @@ class StageStore:
             self.data.setdefault('scene_undo', []).append(copy.deepcopy(scene))
             previous = scene.get(obj.id)
             scene[obj.id] = obj.model_dump()
+            # Keep the live evaluator in the same object namespace as the
+            # scene registry.  Preserve mechanic state while adopting the
+            # replacement's physical pose and visibility.
+            runtime = self.data['state'].setdefault('runtime', {})
+            objects = runtime.setdefault('objects', {})
+            prior_runtime = objects.get(obj.id, {})
+            objects[obj.id] = {**prior_runtime, 'x': obj.x, 'y': obj.y,
+                                'rotation': obj.rotation, 'visible': obj.visible,
+                                'scale': prior_runtime.get('scale', 1.0),
+                                'flags': dict(prior_runtime.get('flags', {}))}
             self.data['version'] += 1
             receipt = {'status':'object_replaced','version':self.data['version'],
                        'object':scene[obj.id], 'previous':previous}
@@ -112,6 +122,8 @@ class StageStore:
                 raise ValueError('scene object not found: ' + object_id)
             self.data.setdefault('scene_undo', []).append(copy.deepcopy(scene))
             previous = scene.pop(object_id)
+            runtime = self.data['state'].setdefault('runtime', {})
+            runtime.setdefault('objects', {}).pop(object_id, None)
             self.data['version'] += 1
             receipt = {'status':'object_removed','version':self.data['version'],
                        'id':object_id, 'previous':previous}

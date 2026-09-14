@@ -61,3 +61,4 @@ Previous camera-focused status is archived in docs/status-before-pointer-replay.
 
 - Verification refresh: Python `pytest -q` reports 40 passed with one dependency deprecation warning; `node --test tests/*.test.mjs` reports 16 passed. `static/stage.mjs` and `static/tracking.mjs` pass syntax checks and Python modules compile cleanly. README was aligned with the pointer/replay competition path.
 - Fresh acceptance refresh: Python `pytest -q` reports 44 passed with one dependency deprecation warning. Real browser first creation, two-round patch, and anti-preset evidence were generated and pushed in commits `baeb2f6`, `0c339f9`, and `e61772e`.
+- Scene replacement and rollback now synchronize the live runtime namespace while preserving state for surviving object identities; regression suite reports 44 passed. English Vertex/Strands documentation is current in `docs/VERTEX.md`.

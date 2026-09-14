@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.4
+
+- Aligned package metadata and description with the live playtest agent product.
+
 ## v0.1.2
 
 - Refreshed the public competition evidence map and release documentation.

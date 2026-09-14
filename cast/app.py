@@ -97,7 +97,11 @@ def replay(payload: dict):
   # phantom actor merely because the two representations differ.
   scene = store.data['state'].get('scene', {})
   aliases = {}
-  for object_id, obj in scene.items():
+  # Prefer the captured snapshot identity when it carries labels; this keeps
+  # portable recordings valid even after the live scene registry changes.
+  snapshot_objects = initial.get('objects', initial) if isinstance(initial, dict) else {}
+  for object_id in set(scene) | set(snapshot_objects if isinstance(snapshot_objects, dict) else {}):
+   obj = {**(scene.get(object_id, {}) if isinstance(scene.get(object_id, {}), dict) else {}), **(snapshot_objects.get(object_id, {}) if isinstance(snapshot_objects, dict) and isinstance(snapshot_objects.get(object_id, {}), dict) else {})}
    if isinstance(obj, dict):
     for key in ('label', 'name'):
      value = obj.get(key)

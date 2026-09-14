@@ -3,6 +3,7 @@ import copy
 import datetime
 import json
 import os
+import re
 import time
 from .schemas import Rule
 from .providers import create_model, model_id, provider_name
@@ -137,6 +138,16 @@ class RuleAgent:
             """
             if not current_rules:
                 return {'status': 'rejected', 'reason': 'No current rules to keep.'}
+            # ``keep`` is a semantic assertion, rather than a generic escape
+            # hatch for a model that refused the request.  Refusal-shaped or
+            # empty explanations must be rejected so the caller surfaces a
+            # real failure instead of presenting an unchanged candidate as a
+            # successful interpretation.
+            if not isinstance(reason, str) or len(reason.strip()) < 8:
+                return {'status': 'rejected', 'reason': 'Explain specifically why the current rules already satisfy the request.'}
+            refusal = re.compile(r"\b(?:cannot|can't|unable|unsupported|not\s+possible|do\s+not|don't)\b", re.I)
+            if refusal.search(reason):
+                return {'status': 'rejected', 'reason': 'A refusal or unsupported request cannot be reported as unchanged.'}
             unchanged.append(reason)
             receipt = {'status': 'unchanged', 'reason': reason, 'base_version': base_version}
             outer.store.event('agent.tool.keep_current_rules', receipt)

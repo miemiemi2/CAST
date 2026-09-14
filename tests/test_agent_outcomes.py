@@ -42,6 +42,16 @@ def test_refusal_is_not_misrepresented_as_success(tmp_path, monkeypatch):
     assert agent.last_proposal is None
 
 
+def test_keep_tool_rejects_refusal_shaped_unchanged_claim(tmp_path, monkeypatch):
+    def action(tools):
+        result = tools['keep_current_rules']('I cannot express that request.')
+        assert result['status'] == 'rejected'
+        return 'I cannot express that request.'
+    agent, _ = setup_agent(tmp_path, monkeypatch, action)
+    with pytest.raises(AgentError, match='did not produce'):
+        agent.generate('Change the mechanic')
+
+
 def test_patch_tool_is_registered_and_returns_proposal(tmp_path, monkeypatch):
     def action(tools):
         result = tools['propose_rule_patch']([{'op':'replace','index':0,'rule':{

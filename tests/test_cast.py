@@ -247,9 +247,9 @@ def test_replay_resolves_scene_label_to_stable_id(tmp_path):
  import cast.app as appmod
  old=appmod.store; appmod.store=make(tmp_path)
  try:
-  appmod.store.data['state']['scene']={'B':{'id':'B','label':'Cargo','kind':'prop','x':.3,'y':.5,'visible':True}}
+  appmod.store.data['state']['scene']={}
   response=TestClient(appmod.app).post('/api/replay',json={
-   'initial':{'objects':{'stage':{'x':.2,'y':.5},'B':{'x':.3,'y':.5}}},
+   'initial':{'objects':{'stage':{'x':.2,'y':.5},'B':{'x':.3,'y':.5,'label':'Cargo'}}},
    'frames':[{'t':0,'signal':{'x':.2,'y':.5,'speed':.8}}],
    'rules':[{'kind':'binding','source':'prop','signal':'speed','target':'Cargo','effect':'detach'}]})
   assert response.status_code==200

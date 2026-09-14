@@ -1,0 +1,137 @@
+{
+  "proof": {
+    "intent": "When Player is to the right of Cargo, make Cargo follow Player vertical movement. Keep the existing attachment mechanic unchanged.",
+    "base_version": 26,
+    "candidate": [
+      {
+        "kind": "binding",
+        "source": "prop",
+        "signal": "x",
+        "target": "stage",
+        "target_object": null,
+        "effect": "position",
+        "threshold": 0.5,
+        "state_key": "active",
+        "version": 1,
+        "when": "always",
+        "event": "frame",
+        "duration_ms": 0,
+        "amount": 1,
+        "persist": true,
+        "conditions": [],
+        "conditions_mode": "all"
+      },
+      {
+        "kind": "binding",
+        "source": "prop",
+        "signal": "distance",
+        "target": "B",
+        "target_object": "B",
+        "effect": "attach",
+        "threshold": 0.5,
+        "state_key": "active",
+        "version": 1,
+        "when": "always",
+        "event": "frame",
+        "duration_ms": 0,
+        "amount": 1,
+        "persist": true,
+        "conditions": [
+          {
+            "signal": "distance",
+            "when": "below",
+            "threshold": 0.1
+          }
+        ],
+        "conditions_mode": "all"
+      },
+      {
+        "kind": "binding",
+        "source": "prop",
+        "signal": "speed",
+        "target": "B",
+        "target_object": null,
+        "effect": "detach",
+        "threshold": 0.5,
+        "state_key": "active",
+        "version": 1,
+        "when": "always",
+        "event": "frame",
+        "duration_ms": 0,
+        "amount": 1,
+        "persist": true,
+        "conditions": [
+          {
+            "signal": "speed",
+            "when": "above",
+            "threshold": 0.5
+          }
+        ],
+        "conditions_mode": "all"
+      },
+      {
+        "kind": "binding",
+        "source": "prop",
+        "signal": "y",
+        "target": "B",
+        "target_object": "B",
+        "effect": "position",
+        "threshold": 0.5,
+        "state_key": "active",
+        "version": 1,
+        "when": "always",
+        "event": "frame",
+        "duration_ms": 0,
+        "amount": 1,
+        "persist": true,
+        "conditions": [
+          {
+            "signal": "x",
+            "when": "above",
+            "threshold": 0.5
+          }
+        ],
+        "conditions_mode": "all"
+      }
+    ],
+    "frames": 43,
+    "identicalInput": true,
+    "identicalInitial": true,
+    "cargo": [
+      {
+        "x": 0.8761905187952057,
+        "y": 0.3642856958869107,
+        "rotation": 0,
+        "scale": 1,
+        "flags": {
+          "active": true
+        },
+        "visible": true,
+        "mask": 1,
+        "light": false,
+        "_attach_offset": [
+          0.05619049947646193,
+          0.014285706619546146
+        ],
+        "_attach_key": "active"
+      },
+      {
+        "x": 0.8761905187952057,
+        "y": 0.3571428801413617,
+        "rotation": 0,
+        "scale": 1,
+        "flags": {
+          "active": true
+        },
+        "visible": true,
+        "mask": 1,
+        "light": false,
+        "_attach_offset": [
+          0.05619049947646193,
+          0.007142890873997165
+        ],
+        "_attach_key": "active"
+      }
+    ]
+  }
+}

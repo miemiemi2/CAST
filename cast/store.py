@@ -135,6 +135,20 @@ class StageStore:
             if not self.data.get('scene_undo'):
                 return {'status':'empty','version':self.data['version'], 'objects':self.data['state'].get('scene', {})}
             self.data['state']['scene'] = self.data['scene_undo'].pop()
+            runtime = self.data['state'].setdefault('runtime', {})
+            runtime_objects = runtime.setdefault('objects', {})
+            scene = self.data['state']['scene']
+            # Restore the registry and remove objects that no longer exist;
+            # retain dynamic flags for identities that remain present.
+            for object_id in list(runtime_objects):
+                if object_id not in scene:
+                    runtime_objects.pop(object_id, None)
+            for object_id, obj in scene.items():
+                prior = runtime_objects.get(object_id, {})
+                runtime_objects[object_id] = {**prior, 'x': obj['x'], 'y': obj['y'],
+                                               'rotation': obj['rotation'], 'visible': obj['visible'],
+                                               'scale': prior.get('scale', 1.0),
+                                               'flags': dict(prior.get('flags', {}))}
             self.data['version'] += 1
             receipt={'status':'scene_rolled_back','version':self.data['version'], 'objects':self.data['state']['scene']}
             self.event('scene.rolled_back', receipt)

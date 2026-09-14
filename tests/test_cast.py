@@ -278,3 +278,11 @@ def test_object_replace_and_remove_sync_runtime_namespace(tmp_path):
  assert live['flags']['attached'] is True
  s.remove_object('hero',2)
  assert 'hero' not in s.data['state']['runtime']['objects']
+
+def test_scene_rollback_syncs_runtime_namespace(tmp_path):
+ s=make(tmp_path); s.update_scene([SceneObject(id='hero',label='Hero')],0)
+ s.update_scene([SceneObject(id='lamp',label='Lamp',kind='light')],1)
+ s.data['state']['runtime']['objects']['lamp']['flags']['lit']=True
+ s.rollback_scene()
+ assert 'lamp' not in s.data['state']['runtime']['objects']
+ assert s.data['state']['runtime']['objects']['hero']['x']==.5

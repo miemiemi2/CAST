@@ -44,7 +44,7 @@ canvas.addEventListener('lostpointercapture',finishPlay);
 function markerMapping(){return {main_a:Number($('marker-main-a').value),main_b:Number($('marker-main-b').value),aux:Number($('marker-aux').value)}}
 async function listCameras(){try{const devices=await navigator.mediaDevices.enumerateDevices();const select=$('camera-device');for(const d of devices.filter(d=>d.kind==='videoinput')){if([...select.options].some(o=>o.value===d.deviceId))continue;const option=document.createElement('option');option.value=d.deviceId;option.textContent=d.label||`Camera ${select.length}`;select.append(option);}}catch(error){$('camera-error').textContent=`Camera list unavailable: ${error.message}`;}}
 listCameras();
-async function api(path,body){const response=await fetch('/api/'+path,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});const result=await response.json();if(!response.ok)throw new Error(typeof result.detail==='string'?result.detail:JSON.stringify(result.detail));return result;}
+async function api(path,body){const response=await fetch('api/'+path,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});const result=await response.json();if(!response.ok)throw new Error(typeof result.detail==='string'?result.detail:JSON.stringify(result.detail));return result;}
 function announce(text){$('message').textContent=text;}
 async function sync(){const state=await api('state');rules=state.rules;version=state.version;$('revision').textContent=`Stage revision ${version}`;$('events').textContent=JSON.stringify(state.events,null,2);if(!scene||!scene.stage){const saved=state.state?.runtime;const existing=saved?.objects&&saved.objects.stage?{...saved.objects}:{};scene={stage:{x:.18,y:.55,rotation:0,scale:1,mask:1,flags:{},visible:true},B:{x:.48,y:.55,rotation:0,scale:1,mask:1,flags:{},visible:true},moon:{x:.8,y:.25,rotation:0,scale:1,mask:1,flags:{},visible:true},...existing};for(const [id,obj] of Object.entries(state.scene||{})){scene[id]??={...obj,scale:1,mask:1,flags:{},visible:true};}}}
 async function replayCompare(candidate,play){
@@ -77,6 +77,7 @@ function drawWorld(context,world,width,height,label='PLAYTEST'){
  context.fillStyle='#347a58';context.font='bold 20px system-ui';context.fillText(delivered?'DELIVERED':'GOAL',802,220);
  context.fillStyle='#29232e';context.font='bold 24px system-ui';context.fillText(label,24,36);
  for(const [name,actor] of Object.entries(world)){
+  if(['last_signal','_active_since','visible'].includes(name))continue;
   if(!actor||!Number.isFinite(actor.x)||!Number.isFinite(actor.y)||actor.visible===false)continue;
   // The prototype has two gameplay actors; optional scene actors remain
   // available to rules, but the unused legacy moon is not a game objective.
@@ -144,7 +145,7 @@ $('export').onclick=async event=>{
  if(!lastPlay)return;
  event.preventDefault();
  try{
-  const response=await fetch('/api/export');
+  const response=await fetch('api/export');
   if(!response.ok)throw new Error('export request failed');
   const packageData=await response.json();
   packageData.play=lastPlay;

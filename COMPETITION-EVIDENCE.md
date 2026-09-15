@@ -18,4 +18,4 @@ CAST's product claim is: **a designer plays once, asks for a mechanic change, an
 
 ## Boundaries
 
-Pointer/replay is the primary competition route. Camera/ArUco remains an input adapter and has automated tracker coverage, but a complete physical-camera acceptance record is not claimed here. A public live deployment and final competition video URL are not present in this repository.
+Pointer/replay is the primary competition route. Camera/ArUco remains an input adapter and has automated tracker coverage, but a complete physical-camera acceptance record is not claimed here. Public live app: https://luluhu.com/cast/ . Its real-browser model/replay and session-isolation evidence is in `records/public-live/`. The competition video was submitted by the user.

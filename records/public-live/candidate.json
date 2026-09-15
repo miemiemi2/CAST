@@ -1,0 +1,35 @@
+{
+  "rules": [
+    {
+      "kind": "relation",
+      "source": "prop",
+      "signal": "distance",
+      "target": "B",
+      "target_object": null,
+      "effect": "attach",
+      "threshold": 0.1,
+      "state_key": "active",
+      "version": 1,
+      "when": "below",
+      "event": "frame",
+      "duration_ms": 0,
+      "amount": 1,
+      "persist": true,
+      "conditions": [
+        {
+          "signal": "speed",
+          "when": "below",
+          "threshold": 0.2
+        }
+      ],
+      "conditions_mode": "all"
+    }
+  ],
+  "base_version": 2,
+  "reply": "I've updated the rule to only attach Cargo when your prop is moving slowly. Once attached, it will remain attached regardless of your speed.\n",
+  "status": "proposed",
+  "provider": "vertex",
+  "model": "gemini-2.5-flash",
+  "calls": 2,
+  "origin": "agent"
+}

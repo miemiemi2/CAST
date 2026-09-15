@@ -1,5 +1,8 @@
 # CAST · live playtest agent
 
+**[Open the live app](https://luluhu.com/cast/)** — no account or camera required.
+Drag Player past Cargo, describe a mechanic change, compare OLD/NEW, then try and keep the candidate. Each visitor has an isolated session.
+
 CAST lets a game or interaction designer play a small prototype once, describe a mechanic change, and compare that exact play under old and new rules. Pointer input is the primary competition path; physical tracked objects remain an input adapter. Strands interprets the
 request and calls a constrained rule tool; the local application controls
 validation, installation, revisions and Undo.

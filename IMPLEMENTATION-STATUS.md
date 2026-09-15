@@ -8,6 +8,8 @@ Camera/ArUco development is paused. Main experience is a playable graybox with P
 
 ## Verified now
 
+- Public app: https://luluhu.com/cast/ . Independent HTTPS browser acceptance verified real Strands generation, same-input OLD/NEW replay, Try/Keep, and isolation between visitors. Hosted services are independent of the Mac; model requests are serialized and capped. See `docs/LIVE-DEPLOYMENT.md` and `records/public-live/`.
+
 - Mac app: `/Users/mixu/Desktop/CAST`, http://127.0.0.1:8765 . VPS source: this directory.
 - Real Strands/Vertex previously generated and installed attach then detach mechanics, installed revision 15. Those API records alone are not a complete browser acceptance test.
 - New browser evidence: `records/browser-replay/1789423519310/evidence.json`, screenshots and WebM. Real Playwright mouse input recorded 73 frames; real Agent removed speed-triggered release; both API replays used identical initial state and input. OLD Cargo finished at x≈0.630; NEW at x≈0.895. Browser comparison shown; Try Candidate entered; discard restored installed mechanic. No page errors.
